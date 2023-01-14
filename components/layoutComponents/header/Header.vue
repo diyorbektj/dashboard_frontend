@@ -43,7 +43,7 @@ const userprofile = ref([
         rounded="lg"
       >
       </v-list-item>
-      <v-btn block color="success" variant="tonal" class="mt-4 py-4"
+      <v-btn @click="Logout" block color="success" variant="tonal" class="mt-4 py-4"
         >Logout</v-btn
       >
     </v-list>
@@ -54,3 +54,28 @@ const userprofile = ref([
   background-color: transparent;
 }
 </style>
+
+<script>
+import axios from "axios";
+import {BASE_URL} from "~/constants";
+import {useRouter} from "nuxt/app";
+
+export default {
+  name: "header",
+  data() {
+    return {
+      token: localStorage.getItem('token')
+    }
+  },
+  methods: {
+    Logout()
+    {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+      axios.post(BASE_URL+"/api/auth/logout").then(response =>{
+        const router = useRouter();
+        router.push({ path: "/auth/login" });
+      });
+    }
+  }
+}
+</script>

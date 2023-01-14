@@ -24,7 +24,7 @@
         <td>{{ item.user_name }}</td>
         <td>{{ item.user_phone }}</td>
         <td>{{ item.total_price }}</td>
-        <td><v-btn color="primary">{{ item.status }}</v-btn></td>
+        <td><v-btn color="primary">{{ item.status.name }}</v-btn></td>
         <td>{{ item.created_at }}</td>
         <td><v-btn @click.prevent="viewOrder(item.id)" color="success" elevation="0"><v-icon color="white">mdi-eye</v-icon></v-btn></td>
       </tr>

@@ -134,7 +134,7 @@ export default {
       attribute: [
         {
           value: '',
-          attribute_id: 8
+          attribute_id: 1
         },
         {
           value: '',

@@ -26,7 +26,7 @@
           <td>{{ item.quantity }} шт.</td>
           <td>
             <p>{{ item.category.name }}</p>
-            <p>Test</p>
+            <p>{{ item.subcategory.name }}</p>
           </td>
           <td>{{ item.price }} c.</td>
           <td>

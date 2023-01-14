@@ -39,15 +39,17 @@ export const useUserStore = defineStore({
                 email: email,
                 password: password,
             }).then(response => {
-                localStorage.setItem('token', response.data.token)
+                if(response.data.data.role_id  >1){
+                    localStorage.setItem('token', response.data.token)
 
-                this.$patch({
-                    user: response.data.data,
-                    isAuthorized: true,
-                    isAdmin:true
-                })
-               const router = useRouter();
-               router.push({ path: "/" });
+                    this.$patch({
+                        user: response.data.data,
+                        isAuthorized: true,
+                        isAdmin:true
+                    })
+                    const router = useRouter();
+                    router.push({ path: "/" });
+                }
             }).catch(err => {
                 console.log(err);
             });

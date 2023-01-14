@@ -4,8 +4,18 @@
       <br />
       <div style="display:flex; justify-content: space-between">
         <div style="font-size: 24px" class="mb-8">Заказы</div>
-        <v-btn color="success"><v-icon>mdi-filter</v-icon></v-btn>
       </div>
+      <v-alert v-if="orders.address"
+          v-model="alert"
+          variant="tonal"
+          color=""
+          title="Адресс товар"
+      >
+        <p class="py-1">Имя: {{ orders.address.fullname }} <br /></p>
+        <p class="py-1">Город: {{ orders.address.city }} <br /></p>
+        <p class="py-1">Улица: {{ orders.address.street }} <br /></p>
+        <p class="py-1">Тел: {{ orders.address.phone_number }} <br /></p>
+      </v-alert>
       <v-table>
         <thead>
         <tr>
@@ -14,17 +24,17 @@
           <th class="text-left">Quantity</th>
           <th class="text-left">Price</th>
           <th class="text-left">Created_at</th>
-          <th class="text-left">View</th>
+<!--          <th class="text-left">View</th>-->
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(item, index) in orders" :key="index">
+        <tr v-for="(item, index) in orders.data" :key="index">
           <td>{{ index +1 }}</td>
           <td>{{ item.product_name }}</td>
           <td>{{ item.quantity }}</td>
           <td>{{ item.price }}</td>
           <td>{{ item.created_at }}</td>
-          <td><v-btn @click.prevent="viewOrder(item.id)" color="success" elevation="0"><v-icon color="white">mdi-eye</v-icon></v-btn></td>
+<!--          <td><v-btn @click.prevent="viewOrder(item.id)" color="success" elevation="0"><v-icon color="white">mdi-eye</v-icon></v-btn></td>-->
         </tr>
         </tbody>
       </v-table>
@@ -54,7 +64,7 @@ export default {
     const route = useRoute()
     axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
     axios.get(BASE_URL+`/api/order/`+route.params.id).then(response => {
-      this.orders = response.data.data
+      this.orders = response.data
       console.log(this.orders)
     }).catch(err => {
       console.log(err);

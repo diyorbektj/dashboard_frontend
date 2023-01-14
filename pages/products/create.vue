@@ -125,19 +125,15 @@ export default {
       images: [],
       quantity: 1,
       price: '0.00',
-      brand_id: null,
+      brand_id: 1,
       attribute: [
         {
           value: '',
-          attribute_id: 8
+          attribute_id: 1
         },
         {
           value: '',
           attribute_id: 2
-        },
-        {
-          value: '',
-          attribute_id: 3
         },
       ],
     }

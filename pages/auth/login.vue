@@ -1,20 +1,27 @@
 <template>
   <div style="background: #f5f4f4; width: 100%; height: 100%">
-<v-container style="display: flex; justify-content: center; align-items: center; margin-top: 160px;">
-  <v-card width="600" height="400">
+<v-container style="display: flex; justify-content: center; align-items: center; margin-top: 160px; padding-bottom: 10px">
+  <v-card width="600" >
     <p style="margin-top: 20px"></p>
 <v-card-text align="center" style="font-size: 32px; font-weight: bold">Login</v-card-text>
-   <v-col style="margin-left: 80px">
-     <label class="text-lable">Email:</label>
-     <div style="align-items: center"><input class="inp" type="text" placeholder="Email" v-model="email"></div>
-   </v-col>
-    <v-col style="margin-left: 80px">
-      <label class="text-lable">Password:</label>
-      <div style="align-items: center"><input class="inp" type="password" placeholder="Password" v-model="password"></div>
-    </v-col>
-    <v-col align="center">
-      <v-btn width="420" elevation="0" color="success" @click.prevent="login">Login</v-btn>
-    </v-col>
+    <div style="display: flex; justify-content: center; position: absolute; top: -121312321342px">
+      <v-alert class="" style="margin-left: 10px;margin-right: 10px" type="error" variant="outlined">
+      test
+      </v-alert>
+    </div>
+   <form @submit.prevent="login">
+     <v-col style="margin-left: 80px">
+       <label class="text-lable">Email:</label>
+       <div style="align-items: center"><input class="inp" type="email" name="email" placeholder="Email" v-model="email"></div>
+     </v-col>
+     <v-col style="margin-left: 80px">
+       <label class="text-lable">Password:</label>
+       <div style="align-items: center"><input class="inp" type="password" name="password" placeholder="Password" v-model="password"></div>
+     </v-col>
+     <v-col align="center">
+       <v-btn width="420" elevation="0" color="success" @click.prevent="login">Login</v-btn>
+     </v-col>
+   </form>
   </v-card>
 </v-container>
   </div>
