@@ -37,9 +37,38 @@
       scrollable
       max-width="600"
   >
-    <v-card>
+    <v-card class="pa-4">
       <v-card-text>
-        <div>salom</div>
+        <div class="">
+          <div style="font-size: 25px; font-weight: bold">Филтер</div>
+          <div class="">
+            <label style="font-size: 16px" class="block text-gray-700 mt-2" for="username">
+              Имя:
+            </label>
+            <div>
+              <input v-model="name" class="w-input border rounded w-full h-12 py-3 px-4  text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Имя">
+            </div>
+          </div>
+          <div class="mt-8">
+            <label style="font-size: 16px" class="block text-gray-700 mt-2" for="username">
+              Имя:
+            </label>
+            <div>
+              <input v-model="name" class="w-input border rounded w-full h-12 py-3 px-4  text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Имя">
+            </div>
+          </div>
+        </div>
+        <div class="mt-8">
+          <label style="font-size: 16px" class="block text-gray-700 mt-2" for="username">
+            Лимит:
+          </label>
+          <div>
+            <input v-model="name" class="w-input border rounded w-full h-12 py-3 px-4  text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Имя">
+          </div>
+        </div>
+        <div class="mt-4">
+          <v-btn block color="success">Submit</v-btn>
+        </div>
       </v-card-text>
     </v-card>
   </v-dialog>

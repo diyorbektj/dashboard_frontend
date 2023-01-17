@@ -140,10 +140,6 @@ export default {
           value: '',
           attribute_id: 2
         },
-        {
-          value: '',
-          attribute_id: 3
-        },
       ],
     }
   },
