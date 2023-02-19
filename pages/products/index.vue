@@ -22,7 +22,7 @@
         <tr v-for="item in products" :key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
-          <td><img width="70" :src="base_url+''+item.image" :alt="item.name"></td>
+          <td><img width="70" :src="item.image" :alt="item.name"></td>
           <td>{{ item.quantity }} шт.</td>
           <td>
             <p>{{ item.category.name }}</p>

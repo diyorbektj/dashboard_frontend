@@ -5,6 +5,11 @@ export default [
     to: "/",
   },
   {
+    title: "Бренды",
+    icon: "mdi-apple",
+    to: "/brands",
+  },
+  {
     title: "Товары",
     icon: "mdi-basket",
     to: "/products",

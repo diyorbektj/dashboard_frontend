@@ -3,7 +3,7 @@
     <v-card-text>
       <br />
       <div class="d-flex" style="justify-content: space-between">
-        <div class="mb-7" style="font-size: 24px">Категории</div>
+        <div class="mb-7" style="font-size: 24px">Бренды</div>
         <v-btn @click="dialog2=true" elevation="0" color="success">Добавить</v-btn>
       </div>
       <v-table>
@@ -33,7 +33,7 @@
       max-width="600"
   >
     <v-card width="600">
-      <v-card-title>Добавить категория</v-card-title>
+      <v-card-title>Добавить бренд</v-card-title>
       <v-divider></v-divider>
       <v-card-text style="height: 200px;">
         <div class="flex" style="display: flex;justify-content: center;">
@@ -53,7 +53,7 @@
       max-width="600"
   >
     <v-card width="600">
-      <v-card-title>Изменить категория</v-card-title>
+      <v-card-title>Изменить бренд</v-card-title>
       <v-divider></v-divider>
       <v-card-text style="height: 200px;">
         <div class="flex" style="display: flex;justify-content: center;">
@@ -120,11 +120,13 @@ export default {
       countDown: 0,
       value: 90,
       category: {},
-      dialog2: false
+      dialog2: false,
+      token: localStorage.getItem('token')
     }
   },
   mounted() {
-    axios.get(BASE_URL+`/api/category`).then(response => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+    axios.get(BASE_URL+`/api/admin/brands`).then(response => {
       this.categories = response.data
     }).catch(err => {
       console.log(err);
@@ -133,7 +135,7 @@ export default {
   },
   methods: {
     EditCategory(id){
-      axios.get(BASE_URL+`/api/category/`+id).then(response => {
+      axios.get(BASE_URL+`/api/admin/brands/`+id).then(response => {
         this.category = response.data
         this.dialog = true
       }).catch(err => {
@@ -141,7 +143,7 @@ export default {
       });
     },
     DeleteCategory(id){
-      axios.delete(BASE_URL+`/api/admin/category/`+id).then(response => {
+      axios.delete(BASE_URL+`/api/admin/brands/`+id).then(response => {
         this.categories = this.categories.filter(item => {
           return item.id !== id
         });
@@ -152,7 +154,7 @@ export default {
       });
     },
     AddCategory(){
-      axios.post(BASE_URL+`/api/admin/category/create`,{
+      axios.post(BASE_URL+`/api/admin/brands/create`,{
         name: this.title,
       }).then(response => {
         console.log("test")
@@ -164,7 +166,7 @@ export default {
       });
     },
     UpdateCategory(id){
-      axios.put(BASE_URL+`/api/admin/category/update/`+id,{
+      axios.put(BASE_URL+`/api/admin/brands/update/`+id,{
         name: this.category.name,
       }).then(response => {
       this.categories.find(item => item.id === id).title = this.category.name

@@ -20,19 +20,24 @@
         <thead>
         <tr>
           <th class="text-left">ID</th>
-          <th class="text-left">Product name</th>
-          <th class="text-left">Quantity</th>
-          <th class="text-left">Price</th>
-          <th class="text-left">Created_at</th>
+          <th class="text-left">Имя продукт</th>
+          <th class="text-left">Доп.</th>
+          <th class="text-left">Количество</th>
+          <th class="text-left">Цена</th>
+          <th class="text-left">Создан</th>
 <!--          <th class="text-left">View</th>-->
         </tr>
         </thead>
         <tbody>
         <tr v-for="(item, index) in orders.data" :key="index">
           <td>{{ index +1 }}</td>
-          <td>{{ item.product_name }}</td>
+          <td>{{ item.product.name }}</td>
+          <td>
+            <p>{{ item.product.colors[0].attribute }}: {{ item.product.colors[0].value }}</p>
+            <p>{{ item.product.sizes[0].attribute }}: {{ item.product.sizes[0].value }}</p>
+          </td>
           <td>{{ item.quantity }}</td>
-          <td>{{ item.price }}</td>
+          <td>{{ item.price }} c.</td>
           <td>{{ item.created_at }}</td>
 <!--          <td><v-btn @click.prevent="viewOrder(item.id)" color="success" elevation="0"><v-icon color="white">mdi-eye</v-icon></v-btn></td>-->
         </tr>

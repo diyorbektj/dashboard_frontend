@@ -31,9 +31,6 @@ export const useUserStore = defineStore({
             // we could do other stuff like redirecting the user
         },
 
-        /**
-         * Attempt to login a user
-         */
         Login(email: string, password: string) {
            axios.post(BASE_URL+`/api/auth/login`, {
                 email: email,
