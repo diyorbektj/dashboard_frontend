@@ -234,7 +234,7 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    axios.get(BASE_URL+'/api/brands')
+    axios.get(BASE_URL+'/api/admin/brands')
         .then(response => {
           this.brands = response.data;
         })
