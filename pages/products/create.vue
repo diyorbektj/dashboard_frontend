@@ -20,7 +20,7 @@
             <span style="color: #ff0000">*</span>Описание:
           </label>
           <div>
-            <textarea required v-model="description" style="height: 220px" class="w-input border rounded w-full h-12 py-3 px-4" placeholder="Описание"></textarea>
+            <textarea v-model="description" style="height: 220px" class="w-input border rounded w-full h-12 py-3 px-4" placeholder="Описание"></textarea>
           </div>
         </div>
       <div class="mt-8">
@@ -193,7 +193,7 @@ export default {
     AddProduct() {
       const formData = new FormData();
       formData.append('name', this.name);
-      formData.append('description', this.description);
+      formData.append('description', this.description ?? "test");
       formData.append('category_id', this.category_id);
       formData.append('subcategory_id', this.subcategory_id);
       formData.append('images', this.images);
