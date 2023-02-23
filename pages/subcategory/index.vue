@@ -134,10 +134,12 @@ export default {
       countDown: 0,
       value: 90,
       subcategory: {},
-      dialog2: false
+      dialog2: false,
+      token: localStorage.getItem('token')
     }
   },
   mounted() {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
     axios.get(BASE_URL+`/api/subcategory`).then(response => {
       this.subcategories = response.data.data
     }).catch(err => {
@@ -152,8 +154,9 @@ export default {
   },
   methods: {
     EditSubCategory(id){
+      axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
       this.dialog = true
-      axios.get(BASE_URL+`/api/subcategory/`+id).then(response => {
+      axios.get(BASE_URL+`/api/admin/subcategory/`+id).then(response => {
         this.subcategory = response.data.data
         console.log(this.subcategory)
       }).catch(err => {
@@ -161,7 +164,8 @@ export default {
       });
     },
     DeleteSubCategory(id){
-      axios.delete(BASE_URL+`/api/subcategory/`+id).then(response => {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+      axios.delete(BASE_URL+`/api/admin/subcategory/`+id).then(response => {
         this.subcategories = this.subcategories.filter(item => {
           return item.id !== id
         });
@@ -172,7 +176,8 @@ export default {
       });
     },
     AddCategory(){
-      axios.post(BASE_URL+`/api/subcategory/create`,{
+      axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+      axios.post(BASE_URL+`/api/admin/subcategory/create`,{
         name: this.title,
         category_id: this.category_id
       }).then(response => {
@@ -185,6 +190,7 @@ export default {
       });
     },
     UpdateSubCategory(id){
+      axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
       axios.patch(BASE_URL+`/api/subcategory/update/`+id,{
         name: this.subcategory.name,
         category_id: this.category_id
