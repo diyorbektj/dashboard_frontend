@@ -19,7 +19,7 @@
         <tr v-for="item in categories" :key="item.name">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
-          <td><img :src="item.image" :alt="item.name"></td>
+          <td><img width="100" height="100" :src="item.image" :alt="item.name"></td>
           <td>
             <v-btn class="mx-2" color="secondary" elevation="0.0" v-bind="attrs"  v-on="on"  @click="EditCategory(item.id)"><v-icon dark>mdi-pencil</v-icon></v-btn>
             <v-btn @click="DeleteCategory(item.id)" class="mx-2" color="error"><v-icon dark>mdi-delete</v-icon></v-btn>
