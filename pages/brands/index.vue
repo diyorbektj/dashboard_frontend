@@ -11,6 +11,7 @@
         <tr>
           <th class="text-left">ID</th>
           <th class="text-left">Имя</th>
+          <th class="text-left">Изображение</th>
           <th class="text-left">Действия</th>
         </tr>
         </thead>
@@ -18,6 +19,7 @@
         <tr v-for="item in categories" :key="item.name">
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
+          <td><img :src="item.image" :alt="item.name"></td>
           <td>
             <v-btn class="mx-2" color="secondary" elevation="0.0" v-bind="attrs"  v-on="on"  @click="EditCategory(item.id)"><v-icon dark>mdi-pencil</v-icon></v-btn>
             <v-btn @click="DeleteCategory(item.id)" class="mx-2" color="error"><v-icon dark>mdi-delete</v-icon></v-btn>
@@ -32,12 +34,16 @@
       scrollable
       max-width="600"
   >
-    <v-card width="600">
+    <v-card width="600" height="300">
       <v-card-title>Добавить бренд</v-card-title>
       <v-divider></v-divider>
-      <v-card-text style="height: 200px;">
-        <div class="flex" style="display: flex;justify-content: center;">
+      <v-card-text style="height: 220px;">
+        <div class="flex" style="">
+          <div>Имя</div>
           <input placeholder="Имя" type="text" v-model="title" class="px-4 py-4 rounded" style="border: 2px solid #e0e0e0; width: 420px">
+        </div><div class="flex" style="padding-top: 10px">
+        <div>Изображение</div>
+        <input type="file" ref="file" @change="handleFileChange" class="px-4 py-4 rounded" style="border: 2px solid #e0e0e0; width: 420px">
         </div>
       </v-card-text>
       <v-divider></v-divider>
@@ -134,6 +140,9 @@ export default {
 
   },
   methods: {
+    handleFileChange(event) {
+      this.file = event.target.files[0];
+    },
     EditCategory(id){
       axios.get(BASE_URL+`/api/admin/brands/`+id).then(response => {
         this.category = response.data
@@ -154,9 +163,9 @@ export default {
       });
     },
     AddCategory(){
-      axios.post(BASE_URL+`/api/admin/brands/create`,{
-        name: this.title,
-      }).then(response => {
+      const formData = new FormData();
+      formData.append('image', this.file);
+      axios.post(BASE_URL+`/api/admin/brands/create`,formData, {params: {name: this.title,}}).then(response => {
         console.log("test")
         this.categories.push(response.data)
         this.countDown = 100
