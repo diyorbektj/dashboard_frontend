@@ -67,7 +67,7 @@
               <input @change="uploadImage" ref="image" class="w-input border rounded w-full h-12 py-3 px-4  text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="file" placeholder="Name">
             </div>
           </div>
-          <div class="wrapper" style="">
+          <div class="wrapper" style="margin-bottom: 24px">
             <div class="mt-8">
               <label style="font-size: 16px" class="block text-gray-700 mt-2" for="username">
                 Цена:
@@ -85,24 +85,24 @@
               </div>
             </div>
           </div>
-          <div class="wrapper" style="">
-            <div class="mt-8">
-              <label style="font-size: 16px" class="block text-gray-700 mt-2" for="username">
-                Размер:
-              </label>
-              <div>
-                <input v-model="attribute[0]['value']" class="w-input-min border rounded w-full h-12 py-3 px-4  text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Цена">
-              </div>
-            </div>
-            <div class="mt-8">
-              <label style="font-size: 16px" class="block text-gray-700 mt-2" for="username">
-                Цвет:
-              </label>
-              <div>
-                <input v-model="attribute[1]['value']" class="w-input-min border rounded w-full h-12 py-3 px-4  text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Количества">
-              </div>
-            </div>
-          </div>
+<!--          <div class="wrapper" style="">-->
+<!--            <div class="mt-8">-->
+<!--              <label style="font-size: 16px" class="block text-gray-700 mt-2" for="username">-->
+<!--                Размер:-->
+<!--              </label>-->
+<!--              <div>-->
+<!--                <input v-model="attribute[0]['value']" class="w-input-min border rounded w-full h-12 py-3 px-4  text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Цена">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="mt-8">-->
+<!--              <label style="font-size: 16px" class="block text-gray-700 mt-2" for="username">-->
+<!--                Цвет:-->
+<!--              </label>-->
+<!--              <div>-->
+<!--                <input v-model="attribute[1]['value']" class="w-input-min border rounded w-full h-12 py-3 px-4  text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Количества">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
           <v-btn @click.prevent="AddProduct" block color="success">Добавить</v-btn>
         </form>
       </div>
@@ -131,16 +131,16 @@ export default {
       quantity: 1,
       price: '0.00',
       brand_id: null,
-      attribute: [
-        {
-          value: '',
-          attribute_id: 1
-        },
-        {
-          value: '',
-          attribute_id: 2
-        },
-      ],
+      // attribute: [
+      //   {
+      //     value: '',
+      //     attribute_id: 1
+      //   },
+      //   {
+      //     value: '',
+      //     attribute_id: 2
+      //   },
+      // ],
     }
   },
   watch: {
@@ -153,14 +153,14 @@ export default {
       this.images[0] = e.target.files[0];
       console.log(this.images)
     },
-    SubCategory(){
-      axios.get(BASE_URL+'/api/subcategory/category/'+this.category_id)
+    async SubCategory(){
+      await axios.get(BASE_URL+'/api/subcategory/category/'+this.category_id)
           .then(res => this.subcategories = res.data.data)
           .catch(error => {
             console.log(error)
           });
     },
-    AddProduct() {
+    async AddProduct() {
 
       const formData = new FormData();
       formData.append('name', this.name);
@@ -171,11 +171,11 @@ export default {
       formData.append('quantity', this.quantity);
       formData.append('price', this.price);
       formData.append('brand_id', this.brand_id);
-      formData.append('attribute', JSON.stringify(this.attribute));
+      // formData.append('attribute', JSON.stringify(this.attribute));
       formData.append('_method', 'PATCH');
       console.log(formData);
       const route = useRoute()
-      axios.post(BASE_URL+'/api/product/update/'+route.params.id, formData)
+      await axios.post(BASE_URL+'/api/admin/product/update/'+route.params.id, formData)
           .then(response => {
             console.log(response.data);
             alert("Product created success!!!")
@@ -213,7 +213,7 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    axios.get(BASE_URL+'/api/brands')
+    axios.get(BASE_URL+'/api/admin/brands')
         .then(response => {
           this.brands = response.data;
         })
