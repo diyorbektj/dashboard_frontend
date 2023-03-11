@@ -65,10 +65,10 @@ export default {
       token: localStorage.getItem('token')
     }
   },
-  async mounted() {
+  mounted() {
     const route = useRoute()
-    await axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
-    await axios.get(BASE_URL + `/api/order/` + route.params.id).then(response => {
+    axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}`
+    axios.get(BASE_URL + `/api/order/` + route.params.id).then(response => {
       this.orders = response.data
       console.log(this.orders)
     }).catch(err => {
